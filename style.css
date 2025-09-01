@@ -1,0 +1,206 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  user-select: none;
+}
+
+h1 {
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+#instructions {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+#cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  width: 120px;
+  height: 190px;
+  background-color: white;
+  border: 2px solid #343a40;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: transform 0.3s ease;
+  opacity: 0;
+  position: relative;
+  user-select: none;
+  color: black;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.card1 {
+  width: 100px;
+  height: 150px;
+  background-color: white;
+  border: 2px solid #343a40;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: transform 0.3s ease;
+  opacity: 0;
+  position: relative;
+  user-select: none;
+  color: black;
+  animation: fadeIn 0.4s ease forwards;
+  /* added for smooth animation when combining */
+  transform-origin: center center;
+}
+
+.card.revealed {
+  opacity: 1;
+}
+
+.card.red, .card1.red {
+  color: #d00;
+}
+
+.card .top-left,
+.card .bottom-right,
+.card1 .top-left,
+.card1 .bottom-right {
+  font-size: 20px;
+  position: absolute;
+  user-select: none;
+}
+
+.card .top-left,
+.card1 .top-left {
+  top: 6px;
+  left: 6px;
+}
+
+.card .bottom-right,
+.card1 .bottom-right {
+  bottom: 6px;
+  right: 6px;
+  transform: rotate(180deg);
+}
+
+.card .center-symbol,
+.card1 .center-symbol {
+  font-size: 90px;
+  line-height: 1;
+  margin: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#result {
+  font-size: 26px;
+  margin-top: 30px;
+  color: #28a745;
+}
+
+#restart {
+  margin-top: 20px;
+  padding: 10px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+#restart:hover {
+  background-color: #0056b3;
+}
+
+.pile {
+  position: relative;
+  border: 2px solid #6c757d;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 140px;
+  height: 380px;
+  overflow: visible;
+}
+
+.pile:hover {
+  transform: scale(1.05);
+}
+
+.pile .card {
+  position: absolute;
+  left: 10px;
+  top:5px;
+  transition: transform 0.3s ease;
+}
+
+@keyframes moveToCenter {
+  to {
+    transform: translate(-50%, -50%) scale(0.5);
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    z-index: 999;
+  }
+}
+
+.card.combine-to-center,
+.card1.combine-to-center {
+  animation: moveToCenter 0.8s forwards ease-in-out;
+}
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+.card.revealed {
+  animation: spinEaseOut 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+@keyframes spinEaseOut {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(720deg); /* Two full spins */
+    opacity: 1;
+  }
+}
+
+
